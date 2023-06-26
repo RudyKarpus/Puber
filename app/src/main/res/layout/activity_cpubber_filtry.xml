@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".cPubberFiltry">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="151dp"
+            android:layout_height="72dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="52dp"
+            android:text="Ocena"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.slider.RangeSlider
+            android:id="@+id/ocena"
+            android:layout_width="377dp"
+            android:layout_height="47dp"
+            android:layout_marginTop="132dp"
+            android:layout_marginEnd="16dp"
+            android:stepSize="0.5"
+            android:valueFrom="0"
+            android:valueTo="5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:values="@array/rangeocena" />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/odleglosc"
+            android:layout_width="360dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="44dp"
+            android:valueFrom="0"
+            android:valueTo="5"
+            android:stepSize="0.5"
+            android:value="5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.549"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ocena" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="91dp"
+            android:layout_height="43dp"
+            android:layout_marginStart="16dp"
+            android:text="W jakiej odległości ?"
+            app:layout_constraintBottom_toTopOf="@+id/odleglosc"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ocena"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="64dp"
+            android:text="Czy otwarte teraz?"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/odleglosc" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/czyotwarte"
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+            android:layout_width="96dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="92dp"
+            android:onClick="otwarte"
+            android:text="Otwarte"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/odleglosc" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Wybierz rodzaje piw, które cię interesują"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/czyotwarte" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/BrowaryLista"
+            android:layout_width="377dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.491"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/czyotwarte">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/AleBrowar"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/AleBrowar"
+                android:visibility="gone"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/Amber"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:text="@string/Amber" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/Artezan"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:text="@string/Artezan" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/Budweiser"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Budweiser" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/Brokreacja"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:text="@string/Brokreacja" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/Cieszyn"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:text="@string/Cieszyn" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/Fortuna"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:text="@string/Fortuna" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/FunkyFluids"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:text="@string/FunkyFluids" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/Grimbergen"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:text="@string/Grimbergen" />
+
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/Grodziskie"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Grodziskie" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/Grolsch"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Grolsch" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/Kingpin"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:text="@string/Kingpin" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/Komes"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:text="@string/Komes" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/Komoran"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:text="@string/Komoran" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/Kozel"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Kozel" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/Książęce"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Książęce" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/Miłosław"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:text="@string/Miłosław" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/Moczybroda"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:text="@string/Moczybroda" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/NaJurze"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:text="@string/NaJurze" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/Nepomucen"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:text="@string/Nepomucen" />
+
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/Paulaner"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Paulaner" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/PilsnerUrquell"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/PilsenrUrquell" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/Pinta"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Pinta" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/Primator"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:text="@string/Primator" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/Raduga"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:text="@string/Raduga" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/Recraft"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:text="@string/Recraft" />
+
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/TrzechKumpli"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/TrzechKumpli" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/Zatecky"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:text="@string/Zatecky" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/Zamiastem"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:text="@string/Zamiastem" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/Żywiec"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Żywiec" />
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="51dp"
+            android:layout_height="26dp"
+            android:layout_marginEnd="68dp"
+            android:onClick="more"
+            android:text="@string/wiecej"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/BrowaryLista" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="36dp"
+            android:text="Wybierz drinki, które cię interesują"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/BrowaryLista" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup"
+            android:layout_width="365dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView7">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/BlackRussian"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/BlackRussian" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/B52"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/B52" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/Cosmopolitan"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Cosmopolitan" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/CubaLibre"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/CubaLibre" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/Daiquiri"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Daiquiri" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/Kamikaze"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Kamikaze" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/KrwawaMary"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/KrwawaMary" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/LongIsland"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/LongIsland" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/Margarita"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Margarita" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/Martini"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Martini" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/Mojito"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Mojito" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/PinaColada"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/PinaColada" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/Sexonthebeach"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Sexonthebeach" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/TequilaSunrise"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/TequilaSunrise" />
+        </com.google.android.material.chip.ChipGroup>
+
+        <Button
+            android:id="@+id/buttonfiltr"
+            android:layout_width="107dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="36dp"
+            android:onClick="Wyjscie"
+            android:text="Filtruj"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chipGroup" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="20dp"
+            android:text="Jaka drogo?"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/odleglosc" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/cena"
+            android:layout_width="wrap_content"
+            android:layout_height="57dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="104dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/odleglosc"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/malo"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/srednio"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$$" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/duzo"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$$$" />
+
+        </com.google.android.material.chip.ChipGroup>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

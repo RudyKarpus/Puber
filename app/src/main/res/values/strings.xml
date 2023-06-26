@@ -1,0 +1,67 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="nazwa_aplikacji">Pubber</string>
+    <string-array name="rangeocena">
+        <item>0</item>
+        <item>5</item>
+    </string-array>
+    <string name="AleBrowar">AleBrowar</string>
+    <string name="Amber">Amber</string>
+    <string name="Artezan">Artezan</string>
+    <string name="FunkyFluids">Funky Fluids</string>
+    <string name="Grimbergen">Grimbergen</string>
+    <string name="Grodziskie">Grodzisk</string>
+    <string name="Grolsch">Grolsch</string>
+    <string name="Harnaś">Harnaś</string>
+    <string name="Kasztelan">Kasztelan</string>
+    <string name="Kingpin">Kingpin</string>
+    <string name="Komoran">Komoran</string>
+    <string name="Kozel">Kozel</string>
+    <string name="Książęce">Książęce</string>
+    <string name="Lech">Lech</string>
+    <string name="Łomża">Łomża</string>
+    <string name="Miłosław">Miłosław</string>
+    <string name="Moczybroda">Moczybroda</string>
+    <string name="NaJurze">Na Jurze</string>
+    <string name="Namysłów">Namysłów</string>
+    <string name="Nepomucen">Nepomucen</string>
+    <string name="Okocim">Okocim</string>
+    <string name="Paulaner">Paulaner</string>
+    <string name="Perła">Perła</string>
+    <string name="PilsenrUrquell">Pilsenr Urquell</string>
+    <string name="Pinta">Pinta</string>
+    <string name="Primator">Primator</string>
+    <string name="Racibórz">Racibórz</string>
+    <string name="Raduga">Raduga</string>
+    <string name="Recraft">Recraft</string>
+    <string name="Staropramen">Staropramen</string>
+    <string name="Somersby">Somersby</string>
+    <string name="TrzechKumpli">Trzech Kumpli</string>
+    <string name="Tyskie">Tyskie</string>
+    <string name="Witnica">Witnica</string>
+    <string name="Wrężel">Wrężel</string>
+    <string name="Zatecky">Zatecky</string>
+    <string name="Zamiastem">Za miastem</string>
+    <string name="Żubr">Żubr</string>
+    <string name="Żywiec">Żywiec</string>
+    <string name="wiecej">więcej</string>
+    <string name="Brokreacja">Brokreacja</string>
+    <string name="Budweiser">Budweiser</string>
+    <string name="Cieszyn">Cieszyn</string>
+    <string name="Fortuna">Fortuna</string>
+    <string name="Komes">Komes</string>
+    <string name="BlackRussian">Black Russian</string>
+    <string name="B52">B-52</string>
+    <string name="Cosmopolitan">Cosmopolitan</string>
+    <string name="CubaLibre">Cuba Libre</string>
+    <string name="Daiquiri">Daiquiri</string>
+    <string name="Kamikaze">Kamikaze</string>
+    <string name="KrwawaMary">Krwawa Mary</string>
+    <string name="LongIsland">Long Island</string>
+    <string name="Margarita">Margarita</string>
+    <string name="Martini">Martini</string>
+    <string name="Mojito">Mojito</string>
+    <string name="PinaColada">Pina Colada</string>
+    <string name="Sexonthebeach">Sex on the beach</string>
+    <string name="TequilaSunrise">Tequila Sunrise</string>
+</resources>
