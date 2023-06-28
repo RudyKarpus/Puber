@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F2A85604"
-    tools:context=".cPubber">
+    tools:context=".ui.PubberSearcher">
 
 
     <android.widget.SearchView
@@ -85,7 +85,7 @@
         android:layout_height="48dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="12dp"
-        android:onClick="filt"
+        android:onClick="goToPubberFiltration"
         app:layout_constraintBottom_toTopOf="@+id/Publista"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_menu_agenda" />

@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.util;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,26 +8,25 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.Calendar;
+import com.example.myapplication.R;
+import com.example.myapplication.data.PubData;
+
 import java.util.List;
 
-public class cAdapter extends ArrayAdapter<cPub>
+public class Adapter extends ArrayAdapter<PubData>
 {
-    public cAdapter(Context context, int resource, List<cPub> PubList)
+    public Adapter(Context context, int resource, List<PubData> pubDataList)
     {
-        super(context,resource,PubList);
+        super(context,resource, pubDataList);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent)
     {
-        cPub pub=getItem(position);
+        PubData pubData =getItem(position);
         if(convertView==null)
         {
-            convertView= LayoutInflater.from(getContext()).inflate(R.layout.cpubbercell,parent,false);
+            convertView= LayoutInflater.from(getContext()).inflate(R.layout.pubbercell,parent,false);
         }
 
 
@@ -38,10 +37,10 @@ public class cAdapter extends ArrayAdapter<cPub>
         ImageView image=(ImageView) convertView.findViewById(R.id.PubImage);
         ImageView imagegodzine=(ImageView) convertView.findViewById(R.id.ImageOtwarcie);
 
-        nazwa.setText(pub.getName());
-        ocena.setText(pub.getOcenagoog());
-        cena.setText(pub.getCena());
-        image.setImageResource(pub.getImage());
+        nazwa.setText(pubData.getName());
+        ocena.setText(pubData.getRatingGoogle()+"");
+        cena.setText(pubData.getPrices());
+        image.setImageResource(pubData.getImage());
 
         imagegodzine.setImageResource(R.drawable.otwarte);
 
