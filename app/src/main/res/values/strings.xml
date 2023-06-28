@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">My Application</string>
     <string name="nazwa_aplikacji">Pubber</string>
-    <string-array name="rangeocena">
+    <string-array name="rangeRating">
         <item>0</item>
         <item>5</item>
     </string-array>
