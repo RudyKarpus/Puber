@@ -9,6 +9,8 @@ import android.widget.ListView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.myapplication.R;
 import com.example.myapplication.app.AppContainer;
@@ -16,12 +18,13 @@ import com.example.myapplication.data.FiltrationData;
 import com.example.myapplication.data.PubData;
 import com.example.myapplication.test_data.TestData;
 import com.example.myapplication.util.Adapter;
+import com.example.myapplication.util.ListPubAdapter;
 
 import java.util.ArrayList;
 
 public class PubberSearcher extends AppCompatActivity {
     public static final String TAG="PubberSearcher";
-    private ListView listView;
+    private RecyclerView  recyclerView ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,7 @@ public class PubberSearcher extends AppCompatActivity {
                 .getFiltrationOfPubs()
                 .observe(this,nameObserver);
 
+
     }
 
     /*
@@ -56,10 +60,10 @@ public class PubberSearcher extends AppCompatActivity {
 
     private void initList()
     {
-        listView=findViewById(R.id.Publista);
+        recyclerView=(RecyclerView)findViewById(R.id.Publista);
         TestData.initDataSets();
-        Adapter adapter=new Adapter(getApplicationContext(),0,TestData.getPubDataList());
-        listView.setAdapter(adapter);
+        ListPubAdapter adapter=new ListPubAdapter(TestData.getPubDataList());
+        recyclerView.setAdapter(adapter);
     }
 
     //Pobieranie arraylist z filtra na temat wybranych filtrów
@@ -83,12 +87,12 @@ public class PubberSearcher extends AppCompatActivity {
             }
 
         }
-        Adapter adapter = new Adapter(getApplicationContext(), 0, filtrated);
+        ListPubAdapter list = new ListPubAdapter( filtrated);
         AppContainer.getInstance()
                 .getPubSearchingContainer()
                 .getListOfFiltratedPubs()
                 .setValue(filtrated);
-        listView.setAdapter(adapter);
+        recyclerView.setAdapter(list);
 
     }
     public void goToPubberFiltration(View v) {

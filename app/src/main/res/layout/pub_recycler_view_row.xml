@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp">
+
+    <com.google.android.material.card.MaterialCardView
+
+        android:layout_width="380dp"
+        android:layout_height="130dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:cardBackgroundColor="@color/pinky">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="380dp"
+            android:layout_height="130dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <ImageView
+                android:id="@+id/PubImage"
+                android:layout_width="135dp"
+                android:layout_height="114dp"
+                android:clickable="false"
+                android:contentDescription="Przykładowe zdjęcie pubu"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.064"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_launcher_foreground" />
+
+            <TextView
+                android:id="@+id/nazwaPubu"
+                android:layout_width="188dp"
+                android:layout_height="35dp"
+                android:clickable="true"
+                android:textColor="#422E2E"
+                android:textIsSelectable="true"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/PubImage"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.152" />
+
+
+            <TextView
+                android:background="@drawable/roundstyle"
+                android:gravity="center"
+                android:id="@+id/czasOtwarcia"
+                android:layout_width="48dp"
+                android:layout_height="22dp"
+                android:layout_marginStart="15dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/PubImage"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:background="@drawable/roundstyle"
+                android:gravity="center"
+                android:id="@+id/drogaAuto"
+                android:layout_width="48dp"
+                android:layout_height="22dp"
+                android:layout_marginStart="15dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/czasOtwarcia"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:gravity="center"
+                android:id="@+id/drogaPieszo"
+                android:layout_width="48dp"
+                android:layout_height="22dp"
+                android:layout_marginStart="15dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+
+                app:layout_constraintStart_toEndOf="@+id/drogaAuto"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:gravity="center"
+                android:id="@+id/ocenaKoszty"
+                android:layout_width="45dp"
+                android:layout_height="22dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="92dp"
+
+                app:layout_constraintStart_toEndOf="@+id/PubImage"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:gravity="center"
+                android:id="@+id/ocenaJakosc"
+                android:layout_width="45dp"
+                android:layout_height="22dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="92dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ocenaKoszty"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:gravity="center"
+                android:textSize="14sp"
+                android:id="@+id/ocenaGoogle"
+                android:layout_width="45dp"
+                android:layout_height="22dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="92dp"
+                app:layout_constraintStart_toEndOf="@+id/ocenaJakosc"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:gravity="center"
+                android:textSize="14sp"
+                android:id="@+id/ocenaInna"
+                android:layout_width="45dp"
+                android:layout_height="22dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="92dp"
+                app:layout_constraintStart_toEndOf="@+id/ocenaGoogle"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

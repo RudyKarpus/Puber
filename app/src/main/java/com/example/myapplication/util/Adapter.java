@@ -31,11 +31,11 @@ public class Adapter extends ArrayAdapter<PubData>
 
 
 
-        TextView nazwa=(TextView) convertView.findViewById(R.id.PubName);
-        TextView ocena=(TextView) convertView.findViewById(R.id.PubOcena);
-        TextView cena=(TextView) convertView.findViewById(R.id.PubOcenaCena);
+        TextView nazwa=(TextView) convertView.findViewById(R.id.nazwaPubu);
+        TextView ocena=(TextView) convertView.findViewById(R.id.ocenaJakosc);
+        TextView cena=(TextView) convertView.findViewById(R.id.ocenaKoszty);
         ImageView image=(ImageView) convertView.findViewById(R.id.PubImage);
-        ImageView imagegodzine=(ImageView) convertView.findViewById(R.id.ImageOtwarcie);
+        ImageView imagegodzine=(ImageView) convertView.findViewById(R.id.czasOtwarcia);
 
         nazwa.setText(pubData.getName());
         ocena.setText(pubData.getRatingGoogle()+"");

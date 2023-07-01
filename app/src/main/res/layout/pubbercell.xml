@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="120dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -26,7 +26,7 @@
             app:srcCompat="@drawable/ic_launcher_foreground" />
 
         <TextView
-            android:id="@+id/PubName"
+            android:id="@+id/nazwaPubu"
             android:layout_width="198dp"
             android:layout_height="50dp"
             android:layout_alignParentStart="true"
@@ -37,7 +37,7 @@
             android:layout_marginBottom="69dp" />
 
         <TextView
-            android:id="@+id/PubOcena"
+            android:id="@+id/ocenaJakosc"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -62,7 +62,7 @@
             app:srcCompat="@drawable/ic_launcher_foreground" />
 
         <TextView
-            android:id="@+id/PubOcenaCena"
+            android:id="@+id/ocenaKoszty"
             android:layout_width="50dp"
             android:layout_height="29dp"
             android:layout_alignParentTop="true"
@@ -70,10 +70,10 @@
             android:layout_marginStart="0dp"
             android:layout_marginTop="51dp"
             android:layout_marginBottom="40dp"
-            android:layout_toEndOf="@+id/PubOcena" />
+            android:layout_toEndOf="@+id/ocenaJakosc" />
 
         <ImageView
-            android:id="@+id/ImageOtwarcie"
+            android:id="@+id/czasOtwarcia"
             android:layout_width="78dp"
             android:layout_height="35dp"
             android:layout_alignParentTop="true"
@@ -83,8 +83,8 @@
             android:layout_marginTop="51dp"
             android:layout_marginEnd="215dp"
             android:layout_marginBottom="40dp"
-            android:layout_toEndOf="@+id/PubOcenaCena"
+            android:layout_toEndOf="@+id/ocenaKoszty"
             app:srcCompat="@drawable/ic_launcher_foreground" />
-    </RelativeLayout>
+    </FrameLayout >
 
 </androidx.constraintlayout.widget.ConstraintLayout>
