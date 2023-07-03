@@ -7,6 +7,7 @@ import static com.example.myapplication.app.Constants.PRICE_VIEW_ID_LIST;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.TranslateAnimation;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -15,6 +16,7 @@ import androidx.navigation.Navigation;
 import com.example.myapplication.R;
 import com.example.myapplication.app.AppContainer;
 import com.example.myapplication.data.FiltrationData;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.slider.RangeSlider;
 import com.google.android.material.slider.Slider;
@@ -37,13 +39,22 @@ public class FiltrationFragment extends Fragment {
     }
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-
+        var nav_bar=getActivity().findViewById(R.id.nav_view);
+        getActivity().findViewById(R.id.nav_view).setVisibility(View.GONE);
+        TranslateAnimation animate = new TranslateAnimation(0, 0, 0,  nav_bar.getHeight());
+        animate.setDuration(200);
+        getActivity().findViewById(R.id.nav_view).startAnimation(animate);
        requireView().findViewById(R.id.buttonfiltr).setOnClickListener(v->{
            filtration(requireView());
+           getActivity().findViewById(R.id.nav_view).setVisibility(View.VISIBLE);
+           TranslateAnimation animate2 = new TranslateAnimation(0, 0,  nav_bar.getHeight(), 0);
+           animate2.setDuration(200);
+           animate2.setFillAfter(true);
+           getActivity().findViewById(R.id.nav_view).startAnimation(animate2);
            Navigation.findNavController(v).navigate(FiltrationFragmentDirections.filtrationToSearcher());
        });
-    }
 
+    }
 
     public void filtration(View view)
     {
