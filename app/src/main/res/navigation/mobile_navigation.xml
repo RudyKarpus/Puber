@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/mainFragment">
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.myapplication.ui.MainFragment"
+        android:label="activity_choice"
+        tools:layout="@layout/choice" >
+        <action
+            android:id="@+id/mainToSearcher"
+            app:destination="@id/searcherScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/searcherScreen"
+        android:name="com.example.myapplication.ui.SearcherFragment"
+        android:label="searcher"
+        tools:layout="@layout/searcher">
+        <action
+            android:id="@+id/searcherToFiltration"
+            app:destination="@id/filltrationScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/filltrationScreen"
+        android:name="com.example.myapplication.ui.FiltrationFragment"
+        android:label="filtration"
+        tools:layout="@layout/filtration">
+        <action
+            android:id="@+id/filtrationToSearcher"
+            app:destination="@id/searcherScreen" />
+    </fragment>
+</navigation>

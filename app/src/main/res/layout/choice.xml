@@ -5,16 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F2A85604"
-    tools:context=".ui.MainScreen">
+    tools:context=".ui.MainFragment">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/choice"
         android:layout_width="161dp"
         android:layout_height="160dp"
-        android:onClick="searching"
         android:text="Wybor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

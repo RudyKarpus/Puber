@@ -1,40 +1,43 @@
 package com.example.myapplication.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ListView;
+import android.widget.ImageButton;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.myapplication.R;
 import com.example.myapplication.app.AppContainer;
 import com.example.myapplication.data.FiltrationData;
 import com.example.myapplication.data.PubData;
 import com.example.myapplication.test_data.TestData;
-import com.example.myapplication.util.Adapter;
+import com.example.myapplication.util.ListPubAdapter;
 
 import java.util.ArrayList;
 
-public class PubberSearcher extends AppCompatActivity {
-    public static final String TAG="PubberSearcher";
-    private ListView listView;
+public class SearcherFragment extends Fragment {
+    public static final String TAG="SearcherFragment";
+    private RecyclerView  recyclerView ;
+    private ListPubAdapter adapter;
+
+    public SearcherFragment()
+    {
+        super(R.layout.searcher);
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pubber_searcher);
-        initList();
-        /*
-         * Niestety nie mozesz porównywac Stringow poprzez "=="
-         * musisz skorzystac z metody equals
-         * przeczytaj sobie https://www.scaler.com/topics/difference-between-equals-method-in-java/
-         * if(filteredDataTestPubList.get(0).equals("nie"))<=dobrze
-         * if(filteredDataTestPubList.get(0)=="nie")<=zle
-         */
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        recyclerView=(RecyclerView)requireView().findViewById(R.id.Publista);
+        TestData.initDataSets();
+        adapter=new ListPubAdapter(TestData.getPubDataList());
+        recyclerView.setAdapter(adapter);
         final Observer<FiltrationData> nameObserver = new Observer<FiltrationData>() {
             @Override
             public void onChanged(@Nullable final FiltrationData filtration) {
@@ -46,21 +49,25 @@ public class PubberSearcher extends AppCompatActivity {
         AppContainer.getInstance()
                 .getPubSearchingContainer()
                 .getFiltrationOfPubs()
-                .observe(this,nameObserver);
+                .observe(getViewLifecycleOwner(),nameObserver);
+        //Refresh publist
+        ((SwipeRefreshLayout)requireView().findViewById(R.id.swiperefresh)).setOnRefreshListener(()->
+        {
+            filtrationOfTestDataList(  AppContainer.getInstance()
+                    .getPubSearchingContainer()
+                    .getFiltrationOfPubs().getValue());
+            ((SwipeRefreshLayout)requireView().findViewById(R.id.swiperefresh)).setRefreshing(false);
+        });
+        //Setting listener to departure to FiltrationScreen
+        ((ImageButton) requireView().findViewById(R.id.imageButton)).setOnClickListener(v->{
+            Navigation.findNavController(v).navigate(SearcherFragmentDirections.searcherToFiltration());
+
+        });
 
     }
-
     /*
     * Usunalem stąd przykladowe dane i przensioslem je do TestData dla przejrzystosci kodu
     */
-
-    private void initList()
-    {
-        listView=findViewById(R.id.Publista);
-        TestData.initDataSets();
-        Adapter adapter=new Adapter(getApplicationContext(),0,TestData.getPubDataList());
-        listView.setAdapter(adapter);
-    }
 
     //Pobieranie arraylist z filtra na temat wybranych filtrów
     private void filtrationOfTestDataList(FiltrationData filtrationData) {
@@ -83,17 +90,13 @@ public class PubberSearcher extends AppCompatActivity {
             }
 
         }
-        Adapter adapter = new Adapter(getApplicationContext(), 0, filtrated);
+        adapter = new ListPubAdapter( filtrated);
         AppContainer.getInstance()
                 .getPubSearchingContainer()
                 .getListOfFiltratedPubs()
                 .setValue(filtrated);
-        listView.setAdapter(adapter);
+        recyclerView.setAdapter(adapter);
 
-    }
-    public void goToPubberFiltration(View v) {
-        Intent i=new Intent(this, PubberFiltration.class);
-        startActivity(i);
     }
 
 

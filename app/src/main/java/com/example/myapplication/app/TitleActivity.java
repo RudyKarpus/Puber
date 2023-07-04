@@ -1,4 +1,4 @@
-package com.example.myapplication.ui;
+package com.example.myapplication.app;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,15 +9,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.myapplication.R;
 
 
-public class Title extends AppCompatActivity {
+public class TitleActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_title);
         final Handler handler = new Handler();
         handler.postDelayed(() -> {
-            Intent i=new Intent(Title.this, MainScreen.class);
+            Intent i=new Intent(TitleActivity.this, MainActivity.class);
             startActivity(i);
 
         }, 5000);

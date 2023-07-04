@@ -4,16 +4,19 @@ import static com.example.myapplication.app.Constants.BREWERIES_VIEW_ID_LIST;
 import static com.example.myapplication.app.Constants.DRINKS_VIEW_ID_LIST;
 import static com.example.myapplication.app.Constants.PRICE_VIEW_ID_LIST;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.TranslateAnimation;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import com.example.myapplication.R;
 import com.example.myapplication.app.AppContainer;
 import com.example.myapplication.data.FiltrationData;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.slider.RangeSlider;
 import com.google.android.material.slider.Slider;
@@ -21,35 +24,48 @@ import com.google.android.material.slider.Slider;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PubberFiltration extends AppCompatActivity {
+public class FiltrationFragment extends Fragment {
 
-    public static final String TAG="PubberFiltration";
+    public static final String TAG="FiltrationFragment";
     public boolean moreBeers =false;
     private List<String> drinks=new ArrayList<>();;
     private List<String> breweries=new ArrayList<>();
     private boolean open=false;
     private FiltrationData filtrationData;
 
-
+    public FiltrationFragment()
+    {
+        super(R.layout.filtration);
+    }
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pubber_filtration);
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        var nav_bar=getActivity().findViewById(R.id.nav_view);
+        getActivity().findViewById(R.id.nav_view).setVisibility(View.GONE);
+        TranslateAnimation animate = new TranslateAnimation(0, 0, 0,  nav_bar.getHeight());
+        animate.setDuration(200);
+        getActivity().findViewById(R.id.nav_view).startAnimation(animate);
+       requireView().findViewById(R.id.buttonfiltr).setOnClickListener(v->{
+           filtration(requireView());
+           getActivity().findViewById(R.id.nav_view).setVisibility(View.VISIBLE);
+           TranslateAnimation animate2 = new TranslateAnimation(0, 0,  nav_bar.getHeight(), 0);
+           animate2.setDuration(200);
+           animate2.setFillAfter(true);
+           getActivity().findViewById(R.id.nav_view).startAnimation(animate2);
+           Navigation.findNavController(v).navigate(FiltrationFragmentDirections.filtrationToSearcher());
+       });
+
     }
 
-    public void filtrationAndGoToPubberSearcher(View view)
+    public void filtration(View view)
     {
-        RangeSlider r=findViewById(R.id.rangeRating);
-        Slider s=findViewById(R.id.odleglosc);
-        /*
-        * Filtr sluzacy do testowania
-         */
+        RangeSlider r=view.findViewById(R.id.rangeRating);
+        Slider s=view.findViewById(R.id.odleglosc);
         filtrationData= new FiltrationData.Builder()
                 .bottomRating( r.getValues().get(0))
                 .upperRating( r.getValues().get(1))
                 .isOpen(false)
                 .build();
-        Log.d(TAG, "filtrationAndGoToPubberSearcher: bottom rating"+r.getValues().get(0)+ ", upper "+r.getValues().get(1));
+        Log.d(TAG, "filtration: bottom rating"+r.getValues().get(0)+ ", upper "+r.getValues().get(1));
         AppContainer
                 .getInstance()
                 .getPubSearchingContainer()
@@ -57,11 +73,11 @@ public class PubberFiltration extends AppCompatActivity {
                 .setValue(filtrationData);
 
         //jakiebrowary
-        breweriesCheck();
+        breweriesCheck(view);
         //drinki
-        drinksCheck();
+        drinksCheck(view);
         //cena
-        priceCheck();
+        priceCheck(view);
         /*
         * Poprawny filtr
         *    filtrationData=new FiltrationData.Builder()
@@ -73,22 +89,19 @@ public class PubberFiltration extends AppCompatActivity {
                 .drinks(drinks)
                 .build();
          */
-
-
-        Intent i=new Intent(this, PubberSearcher.class);
-        startActivity(i);
     }
+
 
     public void isOpen(View v) {
-       open= ((Chip) findViewById(R.id.czyotwarte)).isChecked();
+       open= ((Chip) v.findViewById(R.id.czyotwarte)).isChecked();
     }
 
-    private void priceCheck(){
+    private void priceCheck(View v){
         for(var sid:PRICE_VIEW_ID_LIST)
         {
             try {
             int field = R.id.class.getField(sid).getInt(0);
-            if(((Chip)findViewById(field)).isChecked()) {
+            if(((Chip) v.findViewById(field)).isChecked()) {
                 //filr.add(String.valueOf(((Chip) findViewById(field)).getText()));
             }
             }catch(NoSuchFieldException | IllegalAccessException e) {
@@ -97,14 +110,14 @@ public class PubberFiltration extends AppCompatActivity {
         }
     }
 
-    private void  drinksCheck(){
+    private void  drinksCheck(View v){
         for(var sid:DRINKS_VIEW_ID_LIST)
         {
 
             try {
                 int field = R.id.class.getField(sid).getInt(0);
-                if (((Chip) findViewById(field)).isChecked()) {
-                    drinks.add(String.valueOf(((Chip) findViewById(field)).getText()));
+                if (((Chip) v.findViewById(field)).isChecked()) {
+                    drinks.add(String.valueOf(((Chip) v.findViewById(field)).getText()));
                 }
             }catch(NoSuchFieldException | IllegalAccessException e) {
                 Log.e(TAG, "drinksCheck: Such View Field doesn't exit");
@@ -113,14 +126,14 @@ public class PubberFiltration extends AppCompatActivity {
     }
 
 
-    private void breweriesCheck()  {
+    private void breweriesCheck(View v)  {
         for(var sid:BREWERIES_VIEW_ID_LIST)
         {
             try{
                 int field = R.id.class.getField(sid).getInt(0);
-                if(((Chip)findViewById(field)).isChecked())
+                if(((Chip)v.findViewById(field)).isChecked())
                 {
-                    breweries.add(String.valueOf(((Chip)findViewById(field)).getText()));
+                    breweries.add(String.valueOf(((Chip)v.findViewById(field)).getText()));
                 }
             }catch(NoSuchFieldException | IllegalAccessException e) {
                 Log.e(TAG, "drinksCheck: Such View Field doesn't exit");
@@ -134,7 +147,7 @@ public class PubberFiltration extends AppCompatActivity {
                 for(var sid:BREWERIES_VIEW_ID_LIST)
                 {
                     int field = R.id.class.getField(sid).getInt(0);
-                    findViewById(field).setVisibility(View.VISIBLE);
+                   v.findViewById(field).setVisibility(View.VISIBLE);
                 }
             }catch(NoSuchFieldException | IllegalAccessException e) {
                 Log.e(TAG, "drinksCheck: Such View Field doesn't exit");
@@ -146,7 +159,7 @@ public class PubberFiltration extends AppCompatActivity {
             try {
                 for (var sid : BREWERIES_VIEW_ID_LIST) {
                     int field = R.id.class.getField(sid).getInt(0);
-                    findViewById(field).setVisibility(View.GONE);
+                    v.findViewById(field).setVisibility(View.GONE);
                 }
             }catch(NoSuchFieldException | IllegalAccessException e) {
                 Log.e(TAG, "drinksCheck: Such View Field doesn't exit");
