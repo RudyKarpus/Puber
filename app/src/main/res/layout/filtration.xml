@@ -336,11 +336,12 @@
         </com.google.android.material.chip.ChipGroup>
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/wiecej"
             android:layout_width="51dp"
             android:layout_height="26dp"
             android:layout_marginEnd="68dp"
-            android:onClick="moreBeers"
+
+            android:clickable="true"
             android:text="@string/wiecej"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/BrowaryLista" />

@@ -36,23 +36,22 @@ public class FiltrationData  {
     private final boolean isOpen;
     private final List<String> breweries;
     private final List<String> drinks;
-    private final float upPrice;
+    private final String price ;
 
     public static class Builder {
+
         private float bottomRating=0.0f;
         private float upperRating=5.0f;
         private float distance=20.0f;//in kilometers
 
         private boolean isOpen=false;
         private List<String> breweries=new ArrayList<>();
-        private  List<String> drinks=new ArrayList<>();
-        private float upperPrice =0.0f;
+        private List<String> drinks=new ArrayList<>();
+        private String price ="-$";
 
         public Builder(){
 
         }
-
-
         public Builder distance(float distance)
         {
             this.distance=distance;
@@ -78,8 +77,8 @@ public class FiltrationData  {
             this.drinks = drinks;
             return this;
         }
-        public Builder upperPrice( float upperPrice) {
-            this.upperPrice = upperPrice;
+        public Builder price( String price) {
+            this.price = price;
             return this;
         }
         public FiltrationData build()
@@ -96,6 +95,6 @@ public class FiltrationData  {
         isOpen = builder.isOpen;
         breweries = builder.breweries;
         drinks = builder.drinks;
-        upPrice = builder.upperPrice;
+        price= builder.price;
     }
 }

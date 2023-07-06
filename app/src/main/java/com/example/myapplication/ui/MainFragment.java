@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.example.myapplication.R;
+import com.example.myapplication.app.NavigationBar;
 
 public class MainFragment extends Fragment {
 
@@ -20,5 +21,13 @@ public class MainFragment extends Fragment {
         ((Button) requireView().findViewById(R.id.choice)).setOnClickListener(v->{
             Navigation.findNavController(v).navigate(MainFragmentDirections.mainToSearcher());
         });
+        getActivity().findViewById(R.id.nav_view).setVisibility(View.GONE);
+    }
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        if(getActivity().findViewById(R.id.nav_view).getVisibility()==View.VISIBLE)
+            NavigationBar.smoothHide(getActivity().findViewById(R.id.nav_view));
     }
 }

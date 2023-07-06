@@ -23,7 +23,7 @@ public class PubData
     private String openingHours;
     private ArrayList<String> breweries;
     private ArrayList<String> drinks;
-    private String prices;
+    private String price;
 
 
 }

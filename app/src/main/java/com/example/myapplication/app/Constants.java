@@ -109,4 +109,5 @@ public class Constants {
             "srednio",
             "duzo",
     };
+
 }
