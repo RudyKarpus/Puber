@@ -64,8 +64,8 @@ public class ListPubAdapter extends RecyclerView.Adapter<ListPubAdapter.PubViewH
         holder.czasOtwarcia.setText(pubData.get(position).getRatingGoogle()+"");
         holder.ocenaGoogle.setText(pubData.get(position).getName());
         holder.ocenaInna.setText(pubData.get(position).getRatingGoogle()+"");
-        holder.czasAuto.setText(pubData.get(position).getPrices());
-        holder.czasPieszo.setText(pubData.get(position).getPrices());
+        holder.czasAuto.setText(pubData.get(position).getPrice());
+        holder.czasPieszo.setText(pubData.get(position).getPrice());
         holder.image.setImageResource(pubData.get(position).getImage());
 
 

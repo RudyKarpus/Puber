@@ -15,29 +15,31 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.myapplication.R;
 import com.example.myapplication.app.AppContainer;
+import com.example.myapplication.app.NavigationBar;
 import com.example.myapplication.data.FiltrationData;
 import com.example.myapplication.data.PubData;
 import com.example.myapplication.test_data.TestData;
+import com.example.myapplication.util.FiltrationUtil;
 import com.example.myapplication.util.ListPubAdapter;
 
 import java.util.ArrayList;
 
 public class SearcherFragment extends Fragment {
-    public static final String TAG="SearcherFragment";
-    private RecyclerView  recyclerView ;
+    public static final String TAG = "SearcherFragment";
+    private RecyclerView recyclerView;
     private ListPubAdapter adapter;
 
-    public SearcherFragment()
-    {
+    public SearcherFragment() {
         super(R.layout.searcher);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        recyclerView=(RecyclerView)requireView().findViewById(R.id.Publista);
+        recyclerView = (RecyclerView) requireView().findViewById(R.id.Publista);
         TestData.initDataSets();
-        adapter=new ListPubAdapter(TestData.getPubDataList());
+        adapter = new ListPubAdapter(TestData.getPubDataList());
         recyclerView.setAdapter(adapter);
+
         final Observer<FiltrationData> nameObserver = new Observer<FiltrationData>() {
             @Override
             public void onChanged(@Nullable final FiltrationData filtration) {
@@ -49,48 +51,47 @@ public class SearcherFragment extends Fragment {
         AppContainer.getInstance()
                 .getPubSearchingContainer()
                 .getFiltrationOfPubs()
-                .observe(getViewLifecycleOwner(),nameObserver);
+                .observe(getViewLifecycleOwner(), nameObserver);
         //Refresh publist
-        ((SwipeRefreshLayout)requireView().findViewById(R.id.swiperefresh)).setOnRefreshListener(()->
+        ((SwipeRefreshLayout) requireView().findViewById(R.id.swiperefresh)).setOnRefreshListener(() ->
         {
-            filtrationOfTestDataList(  AppContainer.getInstance()
+            filtrationOfTestDataList(
+                    AppContainer.getInstance()
                     .getPubSearchingContainer()
                     .getFiltrationOfPubs().getValue());
-            ((SwipeRefreshLayout)requireView().findViewById(R.id.swiperefresh)).setRefreshing(false);
+            ((SwipeRefreshLayout) requireView().findViewById(R.id.swiperefresh)).setRefreshing(false);
         });
-        //Setting listener to departure to FiltrationScreen
-        ((ImageButton) requireView().findViewById(R.id.imageButton)).setOnClickListener(v->{
+
+        ((ImageButton) requireView().findViewById(R.id.imageButton)).setOnClickListener(v -> {
             Navigation.findNavController(v).navigate(SearcherFragmentDirections.searcherToFiltration());
 
         });
 
+        NavigationBar.smoothPopUp(getActivity().findViewById(R.id.nav_view));
     }
-    /*
-    * Usunalem stąd przykladowe dane i przensioslem je do TestData dla przejrzystosci kodu
-    */
-
-    //Pobieranie arraylist z filtra na temat wybranych filtrów
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        if(getActivity().findViewById(R.id.nav_view).getVisibility()==View.GONE)
+            NavigationBar.smoothPopUp(getActivity().findViewById(R.id.nav_view));
+    }
     private void filtrationOfTestDataList(FiltrationData filtrationData) {
-        ArrayList<PubData> filtrated=new ArrayList<>();
+        ArrayList<PubData> filtrated;
         Log.d(TAG, "filtrationOfTestDataList: filtraion");
+        FiltrationUtil filter=new FiltrationUtil(filtrationData, TestData.getPubDataList());
         if (filtrationData == null || filtrationData.equals(new FiltrationData.Builder().build())) {
-            filtrated=TestData.getPubDataList();
-
+            filtrated = TestData.getPubDataList();
         } else {
-            for (PubData pubData : TestData.getPubDataList())
-            {
-                float average=(pubData.getRatingFacebook()+pubData.getRatingGoogle()
-                        +pubData.getRatingTripAdvisor()+pubData.getRatingUntapped()
-                        +pubData.getRatingOwn())/5;
-                if(filtrationData.getBottomRating()<=average &&  filtrationData.getUpperRating()>=average)
-                {
-                    Log.d(TAG, "filtrationOfTestDataList: added");
-                    filtrated.add(pubData);
-                }
-            }
-
+            filtrated=filter
+                    .ratingFilter()
+                    .distanceFilter()
+                    .breweriesFilter()
+                    .drinksFilter()
+                    .priceFilter()
+                    .getPubDataArrayList();
         }
-        adapter = new ListPubAdapter( filtrated);
+        adapter = new ListPubAdapter(filtrated);
         AppContainer.getInstance()
                 .getPubSearchingContainer()
                 .getListOfFiltratedPubs()
