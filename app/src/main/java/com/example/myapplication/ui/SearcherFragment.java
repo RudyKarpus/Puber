@@ -14,6 +14,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.example.myapplication.Interface.SelectListener;
 import com.example.myapplication.R;
 import com.example.myapplication.app.AppContainer;
 import com.example.myapplication.data.FiltrationData;
@@ -22,13 +23,13 @@ import com.example.myapplication.test_data.TestData;
 import com.example.myapplication.util.ListPubAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class SearcherFragment extends Fragment  {
+public class SearcherFragment extends Fragment implements SelectListener {
     public static final String TAG="SearcherFragment";
     private RecyclerView  recyclerView ;
     private ListPubAdapter adapter;
     private SearchView searchview;
+    private RecyclerView recycler;
 
     public SearcherFragment()
     {
@@ -39,7 +40,7 @@ public class SearcherFragment extends Fragment  {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         recyclerView=(RecyclerView)requireView().findViewById(R.id.Publista);
         TestData.initDataSets();
-        adapter=new ListPubAdapter(TestData.getPubDataList());
+        adapter=new ListPubAdapter(TestData.getPubDataList(),this);
         recyclerView.setAdapter(adapter);
         final Observer<FiltrationData> nameObserver = new Observer<FiltrationData>() {
             @Override
@@ -66,14 +67,10 @@ public class SearcherFragment extends Fragment  {
             Navigation.findNavController(v).navigate(SearcherFragmentDirections.searcherToFiltration());
 
         });
-        /*setting listener to departure to DetailScreen w robocie, bo z recylerview jest troche więcej jednak zabawy niż z np.listview, bo tam jest łatwo to zrobić
-        ((RecyclerView)requireView().findViewById(R.id.Publista)).setOnClickListener(v->{
-            Navigation.findNavController(v).navigate(SearcherFragmentDirections.searcherToDetail());
-        });
 
-         */
-        initSearchView();
+        initSearchView(this);
     }
+
 
 
     //Pobieranie arraylist z filtra na temat wybranych filtrów
@@ -99,7 +96,7 @@ public class SearcherFragment extends Fragment  {
 
 
         }
-        adapter = new ListPubAdapter( filtrated);
+        adapter = new ListPubAdapter( filtrated,this);
         AppContainer.getInstance()
                 .getPubSearchingContainer()
                 .getListOfFiltratedPubs()
@@ -107,7 +104,7 @@ public class SearcherFragment extends Fragment  {
         recyclerView.setAdapter(adapter);
 
     }
-    private void initSearchView()
+    private void initSearchView(SelectListener sl)
     {
         searchview=(SearchView)requireView().findViewById(R.id.searchView);
         searchview.setQueryHint("Wyszukaj tutaj");
@@ -132,7 +129,7 @@ public class SearcherFragment extends Fragment  {
                         filtreredpubs.add(pub);
                     }
                 }
-                adapter = new ListPubAdapter(filtreredpubs);
+                adapter = new ListPubAdapter( filtreredpubs,sl);
                 recyclerView.setAdapter(adapter);
 
 
@@ -142,4 +139,12 @@ public class SearcherFragment extends Fragment  {
     }
 
 
+    @Override
+    public void onItemClicked(int position)
+    {
+        Navigation.findNavController(getView()).navigate(SearcherFragmentDirections.searcherToDetail());
+
+        AppContainer.getInstance().getPubSearchingContainer().getPosition().setValue(position);
+
+    }
 }

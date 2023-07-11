@@ -9,6 +9,7 @@ public final class AppContainer {
    private static  AppContainer INSTANCE=null;
    @Getter
    private PubSearchingContainer pubSearchingContainer;
+
    private AppContainer()
    {
       pubSearchingContainer=new PubSearchingContainer();
