@@ -30,4 +30,5 @@ public class MainFragment extends Fragment {
         if(getActivity().findViewById(R.id.nav_view).getVisibility()==View.VISIBLE)
             NavigationBar.smoothHide(getActivity().findViewById(R.id.nav_view));
     }
+
 }

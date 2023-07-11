@@ -24,8 +24,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     buildFeatures {
         viewBinding true
@@ -55,7 +55,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.11'
-
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
+    implementation 'com.makeramen:roundedimageview:2.3.0'
 
     //Lombok to shortening code
     compileOnly 'org.projectlombok:lombok:1.18.28'

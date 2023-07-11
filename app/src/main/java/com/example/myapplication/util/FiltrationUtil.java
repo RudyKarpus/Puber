@@ -34,8 +34,8 @@ public class FiltrationUtil {
         for(var pubData: pubDataArrayList)
         {
             float average = (pubData.getRatingFacebook() + pubData.getRatingGoogle()
-                    + pubData.getRatingTripAdvisor() + pubData.getRatingUntapped()
-                    + pubData.getRatingOwn()) / 5;
+                    + pubData.getRatingTripAdvisor()
+                    + pubData.getRatingOwn()) / 4;
             if (filter.getBottomRating() <= average && filter.getUpperRating() >= average) {
                 filtrated.add(pubData);
             }
