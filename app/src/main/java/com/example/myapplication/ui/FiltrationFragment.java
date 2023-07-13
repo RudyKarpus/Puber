@@ -15,6 +15,8 @@ import androidx.navigation.Navigation;
 
 import com.example.myapplication.R;
 import com.example.myapplication.app.AppContainer;
+import com.example.myapplication.app.NavigationBar;
+import com.example.myapplication.data.FiltrationConstants;
 import com.example.myapplication.data.FiltrationData;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.chip.Chip;
@@ -31,6 +33,8 @@ public class FiltrationFragment extends Fragment {
     private List<String> drinks=new ArrayList<>();;
     private List<String> breweries=new ArrayList<>();
     private boolean open=false;
+
+    public String price=FiltrationConstants.BASE_PRICE;
     private FiltrationData filtrationData;
 
     public FiltrationFragment()
@@ -40,19 +44,14 @@ public class FiltrationFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         var nav_bar=getActivity().findViewById(R.id.nav_view);
-        getActivity().findViewById(R.id.nav_view).setVisibility(View.GONE);
-        TranslateAnimation animate = new TranslateAnimation(0, 0, 0,  nav_bar.getHeight());
-        animate.setDuration(200);
-        getActivity().findViewById(R.id.nav_view).startAnimation(animate);
-       requireView().findViewById(R.id.buttonfiltr).setOnClickListener(v->{
-           filtration(requireView());
-           getActivity().findViewById(R.id.nav_view).setVisibility(View.VISIBLE);
-           TranslateAnimation animate2 = new TranslateAnimation(0, 0,  nav_bar.getHeight(), 0);
-           animate2.setDuration(200);
-           animate2.setFillAfter(true);
-           getActivity().findViewById(R.id.nav_view).startAnimation(animate2);
-           Navigation.findNavController(v).navigate(FiltrationFragmentDirections.filtrationToSearcher());
-       });
+        requireView().findViewById(R.id.buttonfiltr).setOnClickListener(v->{
+            filtration(requireView());
+            NavigationBar.smoothPopUp(nav_bar);
+            Navigation.findNavController(v).navigate(FiltrationFragmentDirections.filtrationToSearcher());
+        });
+        NavigationBar.smoothHide(nav_bar);
+        requireView().findViewById(R.id.wiecej).setOnClickListener(buttView->moreBeers(requireView()));
+
 
     }
 
@@ -60,35 +59,27 @@ public class FiltrationFragment extends Fragment {
     {
         RangeSlider r=view.findViewById(R.id.rangeRating);
         Slider s=view.findViewById(R.id.odleglosc);
-        filtrationData= new FiltrationData.Builder()
-                .bottomRating( r.getValues().get(0))
-                .upperRating( r.getValues().get(1))
-                .isOpen(false)
-                .build();
-        Log.d(TAG, "filtration: bottom rating"+r.getValues().get(0)+ ", upper "+r.getValues().get(1));
-        AppContainer
-                .getInstance()
-                .getPubSearchingContainer()
-                .getFiltrationOfPubs()
-                .setValue(filtrationData);
-
         //jakiebrowary
         breweriesCheck(view);
         //drinki
         drinksCheck(view);
         //cena
         priceCheck(view);
-        /*
-        * Poprawny filtr
-        *    filtrationData=new FiltrationData.Builder()
+        filtrationData=new FiltrationData.Builder()
                 .distance(s.getValue())
                 .bottomRating( r.getValues().get(0))
                 .upperRating( r.getValues().get(1))
                 .isOpen(open)
+                .price(price)
                 .breweries(breweries)
                 .drinks(drinks)
                 .build();
-         */
+       // Log.d(TAG, "filtration: bottom rating"+r.getValues().get(0)+ ", upper "+r.getValues().get(1));
+        AppContainer
+                .getInstance()
+                .getPubSearchingContainer()
+                .getFiltrationOfPubs()
+                .setValue(filtrationData);
     }
 
 
@@ -97,23 +88,21 @@ public class FiltrationFragment extends Fragment {
     }
 
     private void priceCheck(View v){
-        for(var sid:PRICE_VIEW_ID_LIST)
-        {
-            try {
-            int field = R.id.class.getField(sid).getInt(0);
-            if(((Chip) v.findViewById(field)).isChecked()) {
-                //filr.add(String.valueOf(((Chip) findViewById(field)).getText()));
-            }
-            }catch(NoSuchFieldException | IllegalAccessException e) {
-                    Log.e(TAG, "drinksCheck: Such View Field doesn't exit");
-            }
+        if(((Chip) v.findViewById(R.id.malo)).isChecked()) {
+            price= FiltrationConstants.MALO;
         }
+        if(((Chip) v.findViewById(R.id.srednio)).isChecked()) {
+            price= FiltrationConstants.SREDNIO;
+        }
+        if(((Chip) v.findViewById(R.id.duzo)).isChecked()) {
+            price= FiltrationConstants.DUZO;
+        }
+
     }
 
     private void  drinksCheck(View v){
         for(var sid:DRINKS_VIEW_ID_LIST)
         {
-
             try {
                 int field = R.id.class.getField(sid).getInt(0);
                 if (((Chip) v.findViewById(field)).isChecked()) {

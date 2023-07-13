@@ -20,9 +20,6 @@
         <action
             android:id="@+id/searcherToFiltration"
             app:destination="@id/filltrationScreen" />
-        <action
-            android:id="@+id/searcherToDetail"
-            app:destination="@id/detailScreen" />
     </fragment>
     <fragment
         android:id="@+id/filltrationScreen"
@@ -33,9 +30,4 @@
             android:id="@+id/filtrationToSearcher"
             app:destination="@id/searcherScreen" />
     </fragment>
-    <fragment
-        android:id="@+id/detailScreen"
-        android:name="com.example.myapplication.ui.DetailFragment"
-        android:label="detail"
-        tools:layout="@layout/detail" />
 </navigation>

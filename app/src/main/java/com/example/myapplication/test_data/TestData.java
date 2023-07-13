@@ -27,7 +27,7 @@ public class TestData {
     
     public static void  initDataSets()
     {
-        breweriesSet1 = new ArrayList<>(List.of("Trzech Kumpli","Amber"));
+        breweriesSet1 = new ArrayList<>(List.of("Pinta","Amber"));
         breweriesSet2 = new ArrayList<>(List.of("Pinta","Fortuna"));
 
         drinksSet1 = new ArrayList<>(List.of("Mojito","Kamikaze"));
@@ -35,17 +35,17 @@ public class TestData {
 
         /*
          * Pomyliłeś w swoich testowych danych id - 1 i 2 dodany pub
-         * miały takie same pola id. wiedziałem o tym xd
+         * miały takie same pola id.
          */
         pubDataList =new ArrayList<>();
         pubDataList.add(new PubData("Pod Harpią",
                 "1", R.drawable.otwarte,
                 2, 2,
-                2,2,0.7f,"18",
+                2,2,2,0.7f,"18",
                 breweriesSet1,drinksSet1,"$"));
-        pubDataList.add(new PubData("Kot ",
+        pubDataList.add(new PubData("Pod ",
                 "1", R.drawable.otwarte,
-                4.1f, 4.1f, 4.4f,4.4f,
+                4.1f, 4.1f, 4.4f,4.4f,4.4f,
                 4.7f,"18",
                 breweriesSet2,drinksSet2,"$$$"));
 
