@@ -53,8 +53,7 @@ public class SearcherFragment extends Fragment {
                 .getFiltrationOfPubs()
                 .observe(getViewLifecycleOwner(), nameObserver);
         //Refresh publist
-        ((SwipeRefreshLayout) requireView().findViewById(R.id.swiperefresh)).setOnRefreshListener(() ->
-        {
+        ((SwipeRefreshLayout) requireView().findViewById(R.id.swiperefresh)).setOnRefreshListener(() -> {
             filtrationOfTestDataList(
                     AppContainer.getInstance()
                     .getPubSearchingContainer()
@@ -89,6 +88,7 @@ public class SearcherFragment extends Fragment {
                     .breweriesFilter()
                     .drinksFilter()
                     .priceFilter()
+                    .isOpenFilter()
                     .getPubDataArrayList();
         }
         adapter = new ListPubAdapter(filtrated);

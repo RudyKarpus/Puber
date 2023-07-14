@@ -65,6 +65,7 @@ public class FiltrationFragment extends Fragment {
         drinksCheck(view);
         //cena
         priceCheck(view);
+        isOpen(view);
         filtrationData=new FiltrationData.Builder()
                 .distance(s.getValue())
                 .bottomRating( r.getValues().get(0))
