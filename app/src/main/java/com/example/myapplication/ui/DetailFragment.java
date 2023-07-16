@@ -36,7 +36,6 @@ public class DetailFragment extends Fragment
         slideritems.add(new SliderItem(R.drawable.zdjecie1));
         slideritems.add(new SliderItem(R.drawable.zdjecie3));
         viewPager.setAdapter(new SliderAdapter(slideritems,viewPager));
-        set();
         invsible();
 
     }
@@ -61,25 +60,6 @@ public class DetailFragment extends Fragment
         t.setVisibility(View.VISIBLE);
     }
 
-    private void set()
-    {
-        int a=0;TextView t=requireView().findViewById(R.id.name);String i="nie udało sie";
-        int position= AppContainer.getInstance().getPubSearchingContainer().getPosition().getValue();
-        Log.d("detail",String.valueOf(position));
-        for(PubData data:
-        AppContainer.getInstance().getPubSearchingContainer().getListOfFiltratedPubs().getValue())
-        {
-            Log.d("detail",String.valueOf(data.getName()));
-            if(a==position+1)
-            {
-                i=String.valueOf(data);
-            }
-        }
 
-
-
-
-        t.setText(i);
-    }
 
 }

@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -42,6 +43,7 @@ public class SearcherFragment extends Fragment implements SelectListener {
         TestData.initDataSets();
         adapter=new ListPubAdapter(TestData.getPubDataList(),this);
         recyclerView.setAdapter(adapter);
+
         final Observer<FiltrationData> nameObserver = new Observer<FiltrationData>() {
             @Override
             public void onChanged(@Nullable final FiltrationData filtration) {
