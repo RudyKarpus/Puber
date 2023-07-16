@@ -16,6 +16,8 @@ public class PubSearchingContainer {
     @Getter
     private final MutableLiveData<List<PubData>> listOfFiltratedPubs=new MutableLiveData<>();
     @Getter
+    private final MutableLiveData<Integer> position=new MutableLiveData<>();
+    @Getter
     private final MutableLiveData<FiltrationData> filtrationOfPubs=new MutableLiveData<>();
     public PubSearchingContainer()
     {
