@@ -139,7 +139,6 @@ public class SearcherFragment extends Fragment implements SelectListener {
     public void onItemClicked(int position)
     {
         Navigation.findNavController(requireView()).navigate(SearcherFragmentDirections.searcherToDetail());
-
         AppContainer.getInstance().getPubSearchingContainer().getPosition().setValue(position);
 
     }
