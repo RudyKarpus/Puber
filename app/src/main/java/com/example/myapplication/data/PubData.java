@@ -18,6 +18,7 @@ public class PubData
     private float ratingGoogle;
     private float ratingFacebook;
     private float ratingTripAdvisor;
+    private float ratingUntapped;
     private float distance;
     private String openingHours;
     private ArrayList<String> breweries;

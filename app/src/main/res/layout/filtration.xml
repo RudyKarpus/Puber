@@ -76,7 +76,6 @@
             android:layout_height="55dp"
             android:layout_marginStart="80dp"
             android:layout_marginTop="92dp"
-            android:onClick="isOpen"
             android:text="Otwarte"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/odleglosc" />

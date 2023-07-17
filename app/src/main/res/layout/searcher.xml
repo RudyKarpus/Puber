@@ -17,7 +17,7 @@
         android:background="#E3965C"
         android:queryHint="Wyszukaj"
 
-        app:layout_constraintBottom_toTopOf="@+id/swiperefresh"
+        app:layout_constraintBottom_toTopOf="@+id/swipeRefresh"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.157"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +27,9 @@
     </android.widget.SearchView>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swiperefresh"
+
+        android:id="@+id/swipeRefresh"
+
         android:layout_width="415dp"
         android:layout_height="432dp"
         android:layout_marginBottom="4dp"
@@ -100,7 +102,8 @@
         android:layout_height="48dp"
 
 
-        app:layout_constraintBottom_toTopOf="@+id/swiperefresh"
+        android:contentDescription="Filtruj"
+        app:layout_constraintBottom_toTopOf="@+id/swipeRefresh"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toEndOf="@+id/searchView"

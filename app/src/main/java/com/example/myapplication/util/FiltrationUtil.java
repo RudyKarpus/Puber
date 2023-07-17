@@ -34,8 +34,8 @@ public class FiltrationUtil {
         for(var pubData: pubDataArrayList)
         {
             float average = (pubData.getRatingFacebook() + pubData.getRatingGoogle()
-                    + pubData.getRatingTripAdvisor()
-                    + pubData.getRatingOwn()) / 4;
+                    + pubData.getRatingTripAdvisor() + pubData.getRatingUntapped()
+                    + pubData.getRatingOwn()) / 5;
             if (filter.getBottomRating() <= average && filter.getUpperRating() >= average) {
                 filtrated.add(pubData);
             }
@@ -111,6 +111,21 @@ public class FiltrationUtil {
                 filtrated.add(pubData);
             }
         }
+        pubDataArrayList=filtrated;
+        return this;
+    }
+    public  FiltrationUtil isOpenFilter()
+    {
+        ArrayList<PubData> filtrated=new ArrayList<>();
+        if(!filter.isOpen()) {
+            return this;
+        }
+        for(var pubData: pubDataArrayList) {
+            if (pubData.getOpeningHours().equals("otwarte")) {
+                filtrated.add(pubData);
+            }
+        }
+        pubDataArrayList=filtrated;
         return this;
     }
 
