@@ -1,9 +1,12 @@
 package com.example.myapplication.ui;
 
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
@@ -23,9 +26,17 @@ import com.example.myapplication.data.PubData;
 import com.example.myapplication.test_data.TestData;
 import com.example.myapplication.util.FiltrationUtil;
 import com.example.myapplication.util.ListPubAdapter;
+import com.google.android.material.chip.Chip;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import java.util.List;
 import java.util.Objects;
 
 public class SearcherFragment extends Fragment implements SelectListener {
@@ -35,7 +46,7 @@ public class SearcherFragment extends Fragment implements SelectListener {
     private ListPubAdapter adapter;
 
     private SearchView searchview;
-    private RecyclerView recycler;
+    private ArrayList<PubData> lista=new ArrayList<>();
 
     public SearcherFragment() {
         super(R.layout.searcher);
@@ -45,7 +56,6 @@ public class SearcherFragment extends Fragment implements SelectListener {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         recyclerView = (RecyclerView) requireView().findViewById(R.id.Publista);
         TestData.initDataSets();
-
         adapter = new ListPubAdapter(TestData.getPubDataList(),this);
         recyclerView.setAdapter(adapter);
 
@@ -53,12 +63,25 @@ public class SearcherFragment extends Fragment implements SelectListener {
             Log.d(TAG, "onChanged: filtration changed");
             filtrationOfTestDataList(filtration);
         };
+
+        final Observer<List<PubData>> name= sorting->{
+            if(AppContainer.getInstance().getPubSearchingContainer().getListOfFiltratedPubs().getValue()!=null) {
+
+
+                adapter = new ListPubAdapter(AppContainer.getInstance().getPubSearchingContainer().getListOfSortedPubs().getValue(), this);
+                recyclerView.setAdapter(adapter);
+            }
+        };
+
+        AppContainer.getInstance().getPubSearchingContainer().getListOfSortedPubs().observe(getViewLifecycleOwner(),name);
+
         AppContainer.getInstance()
                 .getPubSearchingContainer()
                 .getFiltrationOfPubs()
                 .observe(getViewLifecycleOwner(), nameObserver);
         //Refresh publist
         ((SwipeRefreshLayout) requireView().findViewById(R.id.swipeRefresh)).setOnRefreshListener(() -> {
+
             filtrationOfTestDataList(
                     AppContainer.getInstance()
                     .getPubSearchingContainer()
@@ -66,21 +89,64 @@ public class SearcherFragment extends Fragment implements SelectListener {
             ((SwipeRefreshLayout) requireView().findViewById(R.id.swipeRefresh)).setRefreshing(false);
         });
         //Setting listener to departure to FiltrationScreen
-        ((ImageButton) requireView().findViewById(R.id.imageButton)).setOnClickListener(v -> {
+        ((ImageView) requireView().findViewById(R.id.Filtration)).setOnClickListener(v -> {
+            Navigation.findNavController(v).navigate(SearcherFragmentDirections.searcherToFiltration());
+
+        });
+        ((TextView) requireView().findViewById(R.id.wiecej)).setOnClickListener(v -> {
             Navigation.findNavController(v).navigate(SearcherFragmentDirections.searcherToFiltration());
 
         });
         NavigationBar.smoothPopUp(getActivity().findViewById(R.id.nav_view));
-        initSearchView(this);
+        initSearchView();
+       chiplisteners();
+
+
 
     }
-    @Override
-    public void onResume()
+
+    private void chiplisteners()
     {
-        super.onResume();
-        if(getActivity().findViewById(R.id.nav_view).getVisibility()==View.GONE)
-            NavigationBar.smoothPopUp(getActivity().findViewById(R.id.nav_view));
+        ((Chip)requireView().findViewById(R.id.sort)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppContainer.getInstance().getPubSearchingContainer().getPopupInofmation().setValue(1);
+                ((Chip)requireView().findViewById(R.id.sort)).setChecked(true);
+            }
+        });
+
+        ((Chip)requireView().findViewById(R.id.rating)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppContainer.getInstance().getPubSearchingContainer().getPopupInofmation().setValue(2);
+                ((Chip)requireView().findViewById(R.id.rating)).setChecked(true);
+
+            }
+        });
+        ((Chip)requireView().findViewById(R.id.distance)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppContainer.getInstance().getPubSearchingContainer().getPopupInofmation().setValue(3);
+
+            }
+        });
+        ((Chip)requireView().findViewById(R.id.open)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(((Chip)requireView().findViewById(R.id.open)).isChecked())
+                {
+                }
+                else
+                {
+
+                }
+
+            }
+        });
+
     }
+
+
     private void filtrationOfTestDataList(FiltrationData filtrationData) {
         ArrayList<PubData> filtrated;
         Log.d(TAG, "filtrationOfTestDataList: filtraion");
@@ -105,7 +171,7 @@ public class SearcherFragment extends Fragment implements SelectListener {
         recyclerView.setAdapter(adapter);
 
     }
-    private void initSearchView(SelectListener sl)
+    private void initSearchView()
     {
         searchview=(SearchView)requireView().findViewById(R.id.searchView);
         searchview.setQueryHint("Wyszukaj tutaj");
@@ -136,8 +202,16 @@ public class SearcherFragment extends Fragment implements SelectListener {
                 return false;
             }
         });
+
     }
 
+
+    @Override
+    public void OnResume() {
+        super.onResume();
+        if(getActivity().findViewById(R.id.nav_view).getVisibility()==View.GONE)
+            NavigationBar.smoothPopUp(getActivity().findViewById(R.id.nav_view));
+    }
 
     @Override
     public void onItemClicked(int position)
@@ -146,5 +220,9 @@ public class SearcherFragment extends Fragment implements SelectListener {
         AppContainer.getInstance().getPubSearchingContainer().getPosition().setValue(position);
 
     }
+
+
+
+
 
 }

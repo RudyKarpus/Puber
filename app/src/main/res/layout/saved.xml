@@ -4,18 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2C2828"
-    tools:context=".ui.MainFragment">
+    android:background="#F2A85604"
+    tools:context=".ui.SavedFragment">
 
-    <Button
-        android:id="@+id/choice"
-        android:layout_width="161dp"
-        android:layout_height="160dp"
-        android:text="Wybor"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/savelist"
+        android:layout_width="409dp"
+        android:layout_height="729dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

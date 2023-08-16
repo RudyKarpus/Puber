@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F2A85604"
+    android:background="#2C2828"
     tools:context=".app.TitleActivity" >
 
     <TextView
@@ -13,6 +13,7 @@
         android:layout_height="144dp"
         android:text="@string/nazwa_aplikacji"
         android:textAllCaps="true"
+        android:textColor="#FFFFFF"
         android:textSize="60sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

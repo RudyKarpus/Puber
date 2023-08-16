@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#90000000">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout3"
+        android:layout_width="414dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="684dp"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="105dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Sortuj według"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <HorizontalScrollView
+            android:layout_width="497dp"
+            android:layout_height="60dp"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.075"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView10">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/trafnosc"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="103dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="32dp"
+                    android:fontFamily="@font/roboto"
+                    android:text="Trafność"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/CustomChipStyle"
+                    app:chipBackgroundColor="#FFFFFF"
+                    app:chipStrokeColor="#494141"
+                    app:chipStrokeWidth="1dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shapeAppearance="@style/CustomChipSortLeft" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/alphabetical"
+
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="131dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="100dp"
+                    android:fontFamily="@font/roboto"
+                    android:text="Alfabetycznie"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/CustomChipStyle"
+                    app:chipBackgroundColor="#FFFFFF"
+                    app:chipCornerRadius="0dp"
+                    app:chipStrokeColor="#494141"
+                    app:chipStrokeWidth="1dp"
+                    app:layout_constraintStart_toStartOf="@+id/trafnosc"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/rate"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="90dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="260dp"
+                    android:fontFamily="@font/roboto"
+                    android:text="Ocena"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/CustomChipStyle"
+                    app:chipBackgroundColor="#FFFFFF"
+                    app:chipCornerRadius="0dp"
+                    app:chipStrokeColor="#494141"
+                    app:chipStrokeWidth="1dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/distance"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="94dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="348dp"
+                    android:fontFamily="@font/roboto"
+                    android:text="Odległość"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/CustomChipStyle"
+                    app:chipBackgroundColor="#FFFFFF"
+                    app:chipStrokeColor="#494141"
+                    app:chipStrokeWidth="1dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shapeAppearance="@style/CustomChipSortRight" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </HorizontalScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="409dp"
+        android:layout_height="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/dismiss"
+        android:layout_width="409dp"
+        android:layout_height="682dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
